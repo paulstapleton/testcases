@@ -42,6 +42,7 @@ public class StuckInclusiveGatewayTest {
         variables.put("option1", true);
         variables.put("option2", false);
         variables.put("option3", true);
+        variables.put("retry", false);
 
         runtimeService.startProcessInstanceByKey("stuck-inclusive-gateway", variables);
 
@@ -51,6 +52,36 @@ public class StuckInclusiveGatewayTest {
         log.info("executions: {}", executions);
 
         taskService.complete(tasks.get(0).getId());
+
+        tasks = taskService.createTaskQuery().list();
+        log.info("tasks: {}", tasks);
+        executions = runtimeService.createExecutionQuery().list();
+        log.info("executions: {}", executions);
+
+        taskService.complete(tasks.get(0).getId());
+
+        tasks = taskService.createTaskQuery().list();
+        log.info("tasks: {}", tasks);
+        executions = runtimeService.createExecutionQuery().list();
+        log.info("executions: {}", executions);
+
+        taskService.complete(tasks.get(0).getId());
+
+        tasks = taskService.createTaskQuery().list();
+        log.info("tasks: {}", tasks);
+        executions = runtimeService.createExecutionQuery().list();
+        log.info("executions: {}", executions);
+
+        taskService.complete(tasks.get(0).getId());
+
+        variables.put("option3", false);
+
+        tasks = taskService.createTaskQuery().list();
+        log.info("tasks: {}", tasks);
+        executions = runtimeService.createExecutionQuery().list();
+        log.info("executions: {}", executions);
+
+        taskService.complete(tasks.get(0).getId(), variables);
 
         tasks = taskService.createTaskQuery().list();
         log.info("tasks: {}", tasks);
