@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:flowable="http://flowable.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.flowable.org/processdef">
+    <process id="parallel-error-boundary-event" name="Parallel Error Boundary Event" isExecutable="true">
+        <startEvent id="startEvent1"></startEvent>
+        <subProcess id="sid-37C77236-1F17-49FA-AE74-660E5D079DD7" name="subProcess">
+            <startEvent id="sid-06A7B7BB-27C7-4FA3-8414-9A1C15AD6266"></startEvent>
+            <parallelGateway id="sid-8ADD03E5-3DB8-4CD2-88F9-120ABE13D1A7"></parallelGateway>
+            <parallelGateway id="sid-5ECFAF57-1893-4C21-A1B3-8E0260051582"></parallelGateway>
+            <endEvent id="sid-CA11DE7C-2902-430C-ADE4-A5B189899A29"></endEvent>
+            <scriptTask id="sid-DCE78F2A-E303-41BC-AF1A-219AD7CD6733" scriptFormat="groovy" flowable:autoStoreVariables="false">
+                <script><![CDATA[import org.flowable.engine.delegate.BpmnError;
+
+throw new BpmnError("myError");]]></script>
+            </scriptTask>
+            <scriptTask id="sid-79B9F110-39C3-40ED-BDEB-93A1F34D6718" scriptFormat="groovy" flowable:autoStoreVariables="false">
+                <script><![CDATA[import org.flowable.engine.delegate.BpmnError;
+
+throw new BpmnError("myError");]]></script>
+            </scriptTask>
+            <sequenceFlow id="sid-DAE2981D-14F0-46E7-8489-9B5D0DE992A8" sourceRef="sid-06A7B7BB-27C7-4FA3-8414-9A1C15AD6266" targetRef="sid-8ADD03E5-3DB8-4CD2-88F9-120ABE13D1A7"></sequenceFlow>
+            <sequenceFlow id="sid-79EE0C30-E32F-4707-A2A0-3B8654CD7C7E" sourceRef="sid-8ADD03E5-3DB8-4CD2-88F9-120ABE13D1A7" targetRef="sid-DCE78F2A-E303-41BC-AF1A-219AD7CD6733"></sequenceFlow>
+            <sequenceFlow id="sid-D925E682-6A97-4440-89E2-4619E435FF2E" sourceRef="sid-DCE78F2A-E303-41BC-AF1A-219AD7CD6733" targetRef="sid-5ECFAF57-1893-4C21-A1B3-8E0260051582"></sequenceFlow>
+            <sequenceFlow id="sid-F9770684-D85D-4EF8-B097-5826217C3580" sourceRef="sid-5ECFAF57-1893-4C21-A1B3-8E0260051582" targetRef="sid-CA11DE7C-2902-430C-ADE4-A5B189899A29"></sequenceFlow>
+            <sequenceFlow id="sid-1DDF127B-4C95-4EE2-9E95-8F9A72F5FA48" sourceRef="sid-8ADD03E5-3DB8-4CD2-88F9-120ABE13D1A7" targetRef="sid-79B9F110-39C3-40ED-BDEB-93A1F34D6718"></sequenceFlow>
+            <sequenceFlow id="sid-A417592D-2B7F-4C37-A350-040507A10B2A" sourceRef="sid-79B9F110-39C3-40ED-BDEB-93A1F34D6718" targetRef="sid-5ECFAF57-1893-4C21-A1B3-8E0260051582"></sequenceFlow>
+        </subProcess>
+        <sequenceFlow id="sid-797EE6F9-E152-44EF-83AD-50596692C095" sourceRef="startEvent1" targetRef="sid-37C77236-1F17-49FA-AE74-660E5D079DD7"></sequenceFlow>
+        <endEvent id="sid-330B9F67-5B78-41BF-9283-22B1F446B893"></endEvent>
+        <sequenceFlow id="sid-16C684F7-5454-4197-A767-7D2D0CA04574" sourceRef="sid-37C77236-1F17-49FA-AE74-660E5D079DD7" targetRef="sid-330B9F67-5B78-41BF-9283-22B1F446B893"></sequenceFlow>
+        <boundaryEvent id="sid-C04E7588-FB5F-4A35-8072-F6F559180067" attachedToRef="sid-37C77236-1F17-49FA-AE74-660E5D079DD7">
+            <errorEventDefinition errorRef="myError"></errorEventDefinition>
+        </boundaryEvent>
+        <endEvent id="sid-026CC634-333E-4EFC-8A45-65818AC7117A"></endEvent>
+        <sequenceFlow id="sid-BE310045-022B-4A9C-AD0A-CAF88653FFAC" sourceRef="sid-C04E7588-FB5F-4A35-8072-F6F559180067" targetRef="sid-026CC634-333E-4EFC-8A45-65818AC7117A"></sequenceFlow>
+    </process>
+</definitions>
