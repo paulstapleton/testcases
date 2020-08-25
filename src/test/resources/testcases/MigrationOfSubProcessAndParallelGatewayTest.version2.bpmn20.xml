@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:flowable="http://flowable.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.flowable.org/processdef">
+    <process id="MigrationWithOneTask" name="MigrationWithOneTask" isExecutable="true">
+        <subProcess id="sid-0453C91A-B59C-44BF-8EEB-FBEC090F9C96" name="subProcess">
+            <startEvent id="startEvent1" flowable:formFieldValidation="true"></startEvent>
+            <userTask id="task1" name="Task 1" flowable:formFieldValidation="true"></userTask>
+            <endEvent id="sid-8AC9B1A4-EEF0-4E97-BEC6-0DC3E63F9416"></endEvent>
+            <userTask id="task3" name="Task 3" flowable:formFieldValidation="true"></userTask>
+            <parallelGateway id="sid-2EA67EE0-14EB-47FE-A53F-C8788D977EAD"></parallelGateway>
+            <parallelGateway id="sid-4153C6F3-2780-4752-9658-AD00FF2D7673"></parallelGateway>
+            <sequenceFlow id="sid-9D4FA6A3-06CF-4BAB-91F9-691E0911FE80" sourceRef="startEvent1" targetRef="sid-2EA67EE0-14EB-47FE-A53F-C8788D977EAD"></sequenceFlow>
+            <sequenceFlow id="sid-D6C78756-0ED3-47B4-91B1-032E74A84752" sourceRef="sid-2EA67EE0-14EB-47FE-A53F-C8788D977EAD" targetRef="task1"></sequenceFlow>
+            <sequenceFlow id="sid-BE966DFB-9EF1-4A49-AE3C-610D1353B6A7" sourceRef="task1" targetRef="sid-4153C6F3-2780-4752-9658-AD00FF2D7673"></sequenceFlow>
+            <sequenceFlow id="sid-5AF2455A-1BEB-40A5-A6BA-5F63BE59C9E4" sourceRef="sid-4153C6F3-2780-4752-9658-AD00FF2D7673" targetRef="sid-8AC9B1A4-EEF0-4E97-BEC6-0DC3E63F9416"></sequenceFlow>
+            <sequenceFlow id="sid-2C06B410-B444-49A1-A501-178766B6D16A" sourceRef="sid-2EA67EE0-14EB-47FE-A53F-C8788D977EAD" targetRef="task3"></sequenceFlow>
+            <sequenceFlow id="sid-E4581C4D-FA21-4857-8644-62D41231232D" sourceRef="task3" targetRef="sid-4153C6F3-2780-4752-9658-AD00FF2D7673"></sequenceFlow>
+        </subProcess>
+        <startEvent id="sid-7E087E8E-F78A-4923-BCB7-6A4396934094" flowable:formFieldValidation="true"></startEvent>
+        <sequenceFlow id="sid-1D81230A-AA01-40E6-832C-23B844E2F13C" sourceRef="sid-7E087E8E-F78A-4923-BCB7-6A4396934094" targetRef="sid-0453C91A-B59C-44BF-8EEB-FBEC090F9C96"></sequenceFlow>
+        <endEvent id="sid-7B9631D4-31CC-4AE8-AB6E-782E6BB2334C"></endEvent>
+        <sequenceFlow id="sid-27376F22-EB8F-435D-A5BE-749DB6E19BD3" sourceRef="sid-0453C91A-B59C-44BF-8EEB-FBEC090F9C96" targetRef="sid-7B9631D4-31CC-4AE8-AB6E-782E6BB2334C"></sequenceFlow>
+    </process>
+</definitions>
